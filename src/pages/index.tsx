@@ -5,6 +5,7 @@ import { api } from "~/utils/api";
 import type { RouterOutputs } from "~/utils/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime"
+import { LoadingPage } from "~/components/loading";
 
 dayjs.extend(relativeTime);
 
@@ -44,7 +45,7 @@ export default function Home() {
 
   const { data, isLoading } = api.posts.getAll.useQuery();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingPage />;
   if (!data) return <div>Something went wrong...</div>;
 
 
