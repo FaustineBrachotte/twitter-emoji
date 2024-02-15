@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from 'next/image';
 import { SignIn, SignInButton, useUser } from "@clerk/nextjs";
 import { api } from "~/utils/api";
 import type { RouterOutputs } from "~/utils/api";
@@ -15,7 +16,7 @@ const CreatePostWizard = () => {
   if (!user) return null
 
   return <div className="flex gap-3 w-full">
-    <img src={user.profileImageUrl} alt="Profile image" className="h-14 w-14 rounded-full" />
+    <Image src={user.profileImageUrl} alt="Profile image" className="h-14 w-14 rounded-full" height={56} width={56} />
     <input placeholder="Type some emojis!" className="bg-transparent grow outline-none" />
   </div>
 
@@ -26,7 +27,7 @@ const PostView = (props: PostWithUser) => {
   const { post, author } = props;
   return (
     <div key={post.id} className="flex p-4 gap-3 border-b border-slate-400">
-      <img src={author.profileImageUrl} className="h-14 w-14 rounded-full" />
+      <Image src={author.profileImageUrl} className="h-14 w-14 rounded-full" alt={`@{author.username}'s profile picture`} height={56} width={56} />
       <div className="flex flex-col">
         <div className="flex text-slate-300 gap-1">
           <span>{`@${author.username}`}</span><span className="font-thin">{`• ${dayjs(post.createdAt).fromNow()}`}</span>
